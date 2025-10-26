@@ -71,8 +71,15 @@ public class ProyectoFinal {
     }
 
     void inventario(Scanner entrada) {
-        String suministros[] = new String[9];
-        System.out.println("Selecciona tus articulos");
+        String suministros[] = new String[6];
+        System.out.println("*******************************************");
+        System.out.println("Puedes seleccionar los siguientes articulos:");
+        System.out.println("*******************************************");
+        System.out.println("Armas: cuchillo, boleadora, revolver.");
+        System.out.println("Salud: asado, milanesa, bizcochos.");
+        System.out.println("Especiales: mate, agua, coquita.");
+        System.out.println("********************************************");
+        System.out.println("Selecciona tus articulos, PUEDES ELEGIR 2 DE CADA SECCION");
         System.out.println("Ingrese sus suministros (escriba 'eliminar' para borrar uno):");
         
         for (int i = 0; i < suministros.length; i++) {
