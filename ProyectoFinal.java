@@ -1,10 +1,12 @@
 package proyectofinal;
 
 import java.util.Scanner;
+import java.util.Random;
+
 
 public class ProyectoFinal {
-
-    int salud = 100, danio = 0;
+ String suministros[] = new String[6];
+    
 
     void bienvenida() {
         try {
@@ -21,21 +23,22 @@ public class ProyectoFinal {
     }
 
     void inicio(Scanner entrada) {
+        int salud = 100;
         System.out.println("Selecciona uno de los siguientes escenarios");
-        System.out.println("Elige entre:CAPITAL, INTERIOR, FRONTERA");
-        String escenario = entrada.nextLine().toLowerCase();
+        System.out.println("Elige entre: 1-CAPITAL, 2-INTERIOR,3-FRONTERA");
+        int escenario = entrada.nextInt();
         switch (escenario) {
-            case "capital":
+            case 1:
                 System.out.println("Escenario Seleccionado");
                 int vida = salud - 15;
                 System.out.println("Comienzas con " + vida + " Salud");
                 break;
-            case "interior":
+            case 2:
                 System.out.println("Escenario Seleccionado");
                 vida = salud - 20;
                 System.out.println("Comienzas  con " + vida + " Salud");
                 break;
-            case "frontera":
+            case 3:
                 System.out.println("Escenario Seleccionado");
                 vida = salud - 30;
                 System.out.println("Comienzas con " + vida + " Salud");
@@ -52,7 +55,7 @@ public class ProyectoFinal {
         String equipamiento[] = {"Pistola", "Cuchillo", "Chaleco", "Boqtiquin"};
         int cantidad[] = {50, 20, 100, 25};
         System.out.println("HAZ elegido a leon");
-        salud = 200;
+        int salud = 200;
 
     }
 
@@ -61,7 +64,7 @@ public class ProyectoFinal {
         int cantidad[] = {75, 20, 100, 0};
 
         System.out.println("Elegiste a Jill Valentine");
-        salud = 150;
+      int  salud = 150;
     }
 
     void seleccion(Scanner entrada) {
@@ -70,7 +73,7 @@ public class ProyectoFinal {
 
     }
 
-    void inventario(Scanner entrada) {
+    void inventario(String suministro, Scanner entrada) {
         String suministros[] = new String[6];
         System.out.println("*******************************************");
         System.out.println("Puedes seleccionar los siguientes articulos:");
@@ -111,28 +114,73 @@ public class ProyectoFinal {
     }
 
     void batalla(Scanner entrada) {
-        int enemigo = 150;
-        System.out.println("Con que cantidad de poder deseas atacar");
-
-        while (enemigo < 10) {
-            System.out.println("El enemigo tiene poca vida");
-            enemigo = entrada.nextInt();
+         Random azar = new Random();
+        System.out.println("Elije el enemigo a enfrentar 1-EL BRAIAN, 2-EL GAUCHO, 3-EL VALLANO");
+        int escenario=entrada.nextInt();
+        int saludJugador=200, enemigo=0;
+        
+        if(escenario==1){
+            System.out.println("Enemigo seleccionado EL BRAIAN");
+           enemigo=150;
+        }else if(escenario==2){
+            System.out.println("Enemigo seleccionado EL GAUCHO");
+            enemigo=200;
+        }else if(escenario==3){
+            System.out.println("Enemigo seleccionado EL VALLANO");
+            enemigo=250;
+        }else{
+            System.out.println("Opcion Invalida");
         }
+         System.out.println("Elige un objeto para usar:");
+        for (int i = 0; i < suministros.length; i++) {
+            System.out.println((i) + " - " + suministros[i]);
+        }
+        int itemElegido = entrada.nextInt();
+        System.out.println("Elegiste " + itemElegido);
+        System.out.println("La batalla comienza. ¡Tendrás 3 rondas!");
+        for (int turno = 1; turno <= 3; turno++) {
+            System.out.print("¿Con qué cantidad de poder deseas atacar? ");
+        int poder = entrada.nextInt();
+        if (poder <= 0) {
+            System.out.println("No puedes atacar con poder 0 o negativo. Perdiste el turno.");
+        } else {
+            enemigo -= poder;
+            System.out.println("Atacaste con " + poder + " de poder. Salud restante del enemigo: " + enemigo);
+        }
+        int golpeEnemigo=azar.nextInt(50)+1;
+        saludJugador -= golpeEnemigo;
+        System.out.println( " te contraataca con " + golpeEnemigo+ " de daño!");
+    }
+
+        
+         if (saludJugador > enemigo) {
+            System.out.println("¡Has derrotado");
+            
+        }
+            
+        }
+        
+       
+
+        
     }
 
     public static void main(String[] args) {
         ProyectoFinal ejercicio = new ProyectoFinal();
         Scanner entrada = new Scanner(System.in);
+        Random azar = new Random();
+        
 
         String valija[] = {"Espacio0"};
-        ejercicio.bienvenida();
+       // ejercicio.bienvenida();
         // ejercicio.seleccion(entrada);
-        // ejercicio.inicio(entrada);
-        //ejercicio.inventario();
-        // ejercicio.batalla(entrada);
-        ejercicio.inventario(entrada);
+         ejercicio.inicio(entrada);
+        //  ejercicio.inventario(entrada);
+         ejercicio.batalla(entrada);
+      
 
         // TODO code application logic here
     }
 
-}
+
+
