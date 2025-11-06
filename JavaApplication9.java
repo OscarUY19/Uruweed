@@ -7,11 +7,13 @@ public class JavaApplication9 {
 
     void bienvenida() {
         try {
-            System.out.println("Bienvenido a URUWEED ");
+            System.out.println("                          BIENVENIDO A **URUWEED**");
             Thread.sleep(2000);
-            System.out.println("Este juego esta ambientado en nuestro pais y te enfrentaras a enemigos tipicos de cada parte del Uruguay");
+            System.out.println("En este juego ambientado en nuestro pais y donde te enfrentaras a enemigos de cada rincon");
             Thread.sleep(2000);
-            System.out.println("Estas preparado??");
+            System.out.println("Tendras el suficiente PODER para VENCER");
+            Thread.sleep(2000);
+            System.out.println("Este" + " PODER " + " que viene de la sangre Charrua y posee el protagonista, sumandole la GARRA del mismo");
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             // Manejo de la excepción si el hilo es interrumpido
@@ -19,35 +21,39 @@ public class JavaApplication9 {
         }
     }
 
-    void iniciar(Scanner entrada) {
-        int salud = 100;
-        System.out.println("Selecciona uno de los siguientes escenarios");
-        System.out.println("Elige entre: 1-CAPITAL, 2-INTERIOR,3-FRONTERA");
+    int iniciar(Scanner entrada) {
+        int energia = 500, salud = -1;
+        System.out.println("*******************************************");
+        System.out.println("   PARA COMENZAR DEBES ELEGIR UN ESCENARIO  ");
+        System.out.println("********************************************");
+        
+        System.out.println("LAS OPCIONES SON : 1-CAPITAL, 2-INTERIOR, 3-FRONTERA ");
         int escenario = entrada.nextInt();
         switch (escenario) {
             case 1:
-                System.out.println("Escenario Seleccionado");
-                int vida = salud - 15;
-                System.out.println("Comienzas con " + vida + " Salud");
+                System.out.println("ESCENARIO SELECCIONADO");
+                salud = energia - 15;
+                System.out.println("Comienzas con " + salud + " Salud");
                 break;
             case 2:
-                System.out.println("Escenario Seleccionado");
-                vida = salud - 20;
-                System.out.println("Comienzas  con " + vida + " Salud");
+                System.out.println("ESCENARIO SELECCIONADO");
+                salud = energia - 20;
+                System.out.println("Comienzas  con " + salud + " Salud");
                 break;
             case 3:
-                System.out.println("Escenario Seleccionado");
-                vida = salud - 30;
-                System.out.println("Comienzas con " + vida + " Salud");
+                System.out.println("ESCENARIO SELECCIONADO");
+                salud = energia - 30;
+                System.out.println("Comienzas con " + salud + " Salud");
                 break;
             default:
                 System.out.println("Debe introducir un escenario correcto");
                 break;
 
         }
+        return salud;
     }
 
-    void inventario(String[] suministro, Scanner entrada) {
+    String[] inventario(String[] suministro, Scanner entrada) {
         String suministros[] = new String[6];
         System.out.println("*******************************************");
         System.out.println("Puedes seleccionar los siguientes articulos:");
@@ -79,34 +85,55 @@ public class JavaApplication9 {
             }
 
         }
-        System.out.println("Los suministros ingresados son ");
-        for (int i = 0; i < suministros.length; i++) {
-            System.out.println("suministros son " + i + " " + suministros[i]);
 
-        }
+        mostrarInventario(suministros);
+        return suministros;
 
     }
 
-    void pelea(Scanner entrada) {
-        String suministros[] = new String[6];
+    void mostrarInventario(String[] baul) {
 
+        System.out.println("Los suministros ingresados son ");
+        for (int i = 0; i < baul.length; i++) {
+            System.out.println("suministros son " + i + " " + baul[i]);
+
+        }
+    }
+
+    int pelea(Scanner entrada) {
         Random azar = new Random();
-        System.out.println("Elije el enemigo a enfrentar 1-EL BRAIAN, 2-EL GAUCHO, 3-EL VALLANO");
-        int escenario = entrada.nextInt();
+        String suministros[] = new String[6];
+        String villano1 = " EL BRAIAN";
+        String villano2 = " EL GAUCHO";
+        String villano3 = "EL BAYANO";
+        String nombreVillano = "";
+
         int saludJugador = 200, enemigo = 0;
 
-        if (escenario == 1) {
-            System.out.println("Enemigo seleccionado EL BRAIAN");
-            enemigo = 150;
-        } else if (escenario == 2) {
-            System.out.println("Enemigo seleccionado EL GAUCHO");
-            enemigo = 200;
-        } else if (escenario == 3) {
-            System.out.println("Enemigo seleccionado EL VALLANO");
-            enemigo = 250;
-        } else {
-            System.out.println("Opcion Invalida");
+        System.out.println("Elije el enemigo a enfrentar 1-EL BRAIAN, 2-EL GAUCHO, 3-EL BAYANO");
+        int escenario = entrada.nextInt();
+
+        switch (escenario) {
+            case 1:
+                System.out.println("Vas a enfrentar a: " + villano1);
+                enemigo = 150;
+                nombreVillano = villano1;
+                break;
+            case 2:
+                System.out.println("Vas a enfrentar a: " + villano2);
+                enemigo = 200;
+                nombreVillano = villano2;
+                break;
+            case 3:
+                System.out.println("Vas a enfrenatar a: " + villano3);
+                enemigo = 300;
+                nombreVillano = villano3;
+                break;
+            default:
+                System.out.println("OPCION INVALIDA, ELIJA UNA OPCION ENTRE 1-3");
+                break;
         }
+
         System.out.println("Elige un objeto para usar:");
         for (int i = 0; i < suministros.length; i++) {
             System.out.println((i) + " - " + suministros[i]);
@@ -114,6 +141,8 @@ public class JavaApplication9 {
         int itemElegido = entrada.nextInt();
         System.out.println("Elegiste " + itemElegido);
         System.out.println("La batalla comienza. ¡Tendrás 3 rondas!");
+        System.out.println("***************************************");
+
         for (int turno = 1; turno <= 3; turno++) {
             System.out.print("¿Con qué cantidad de poder deseas atacar? ");
             int poder = entrada.nextInt();
@@ -121,7 +150,12 @@ public class JavaApplication9 {
                 System.out.println("No puedes atacar con poder 0 o negativo. Perdiste el turno.");
             } else {
                 enemigo -= poder;
-                System.out.println("Atacaste con " + poder + " de poder. Salud restante del enemigo: " + enemigo);
+                System.out.println("Atacaste con " + poder + " de poder. Salud restante de " +nombreVillano + " es " + enemigo);
+            }
+            if (enemigo <= 0) {
+                System.out.println("Lograste vencer al enemigo ");
+            } else {
+                System.out.println("La Batalla continua " + "Tu puedes!");
             }
             int golpeEnemigo = azar.nextInt(100) + 1;
             saludJugador -= golpeEnemigo;
@@ -129,22 +163,102 @@ public class JavaApplication9 {
             System.out.println("Tu salud restante es " + saludJugador);
 
         }
+        System.out.println("***************************************");
+        System.out.println("La batalla ha terminado.");
+
+        if (enemigo <= 0) {
+            System.out.println("¡GANASTE! " + nombreVillano);
+        } else if (saludJugador <= 0) {
+            System.out.println("PERDISTE... " + nombreVillano);
+        } 
+
+        return saludJugador;
+
+    }
+
+    /*int decision(){
+        
+        
         if (saludJugador == 0) {
             System.out.println("¡Has perdido");
 
         } else {
             System.out.println("HAs ganado");
         }
+    }*/
+    boolean existe(String[] inventario, String suministros) {
+        boolean encontrado = false;
+        int i = 0;
+        while (!encontrado && i < inventario.length) {
+            if (inventario[i].equalsIgnoreCase(suministros)) {
+                encontrado = true;
+            }
+            i++;
+        }
+        return encontrado;
+    }
+
+    int jefe(Scanner entrada) {
+        Random azar = new Random();
+        String boss = " EL GENERAL FRUCTUOSO RIVERA";
+        int saludJugador = 200, saludEnemigo = 400;
+        System.out.println("************************************************************");
+        System.out.println("¡¡¡ENFRENTAS AL JEFE FINAL!!!" + boss);
+        System.out.println("************************************************************");
+
+        do {
+            System.out.println("Con cuanto deseas atacar??");
+            int ataque = entrada.nextInt();
+            int golpeEnemigo = azar.nextInt(80) + 1;
+            saludJugador -= golpeEnemigo;
+            saludEnemigo -= ataque;
+            System.out.println("Atacas a " + boss + ". ¡Le quedan " + "---" + " de salud!");
+            if (saludEnemigo <= 0) {
+                System.out.println("Enemigo muerto");
+            } else {
+                System.out.println("Debes continuar Sobreviviendo");
+            }
+            System.out.println(boss + " te ataca por " + golpeEnemigo + " de daño.");
+            System.out.println("Te quedan " + saludJugador + " de salud.");
+
+            if (saludJugador < 50) {
+                System.out.println("¡Estás en estado crítico!");
+            }
+
+            if (saludJugador <= 0) {
+                System.out.println("Moriste " + saludJugador);
+            }
+
+        } while (saludJugador > 0 && saludEnemigo > 0);
+        if (saludEnemigo <= 0) {
+            System.out.println("GANASTE " + boss);
+        } else {
+            System.out.println("FUISTE DERROTADO POR:  " + boss);
+        }
+        System.out.println("***********************************");
+        System.out.println("            FIN DEL JUEGO");
+        System.out.println("***********************************");
+
+        return saludJugador;
     }
 
     public static void main(String[] args) {
 
         JavaApplication9 ejercicio = new JavaApplication9();
+        String nombres[] = {"Shana", "OScar", "Lucas"};
         Scanner entrada = new Scanner(System.in);
+       // int salud = ejercicio.iniciar(entrada);
+//        int saludJugador = ejercicio.pelea(entrada);
+       // System.out.println(salud);
         ejercicio.bienvenida();
         ejercicio.iniciar(entrada);
-       // ejercicio.inventario(suministros, entrada);
+
+        String suministros[] = new String[6];
+        //suministros=ejercicio.inventario(suministros, entrada);
+        // ejercicio.existe(nombres, suministros);
+
         ejercicio.pelea(entrada);
+        ejercicio.jefe(entrada);
 
         // TODO code application logic here
     }
