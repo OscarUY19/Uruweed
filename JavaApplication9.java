@@ -7,13 +7,16 @@ public class JavaApplication9 {
 
     void bienvenida() {
         try {
-            System.out.println("                          BIENVENIDO A **URUWEED**");
+            System.out.println("********************************************************************************");
+            System.out.println("********                 BIENVENIDO    A    URUWEED            *****************");
+            System.out.println("********************************************************************************");
             Thread.sleep(2000);
-            System.out.println("En este juego ambientado en nuestro pais y donde te enfrentaras a enemigos de cada rincon");
+            System.out.println("En esta aventura te toca ponerte en los zapatos de Obdulio, que con su termo y mate bajo el brazo"
+                    + "le toca enfrentar a enemigos que quieren tomar su querido paisito");
             Thread.sleep(2000);
             System.out.println("Tendras el suficiente PODER para VENCER");
             Thread.sleep(2000);
-            System.out.println("Este" + " PODER " + " que viene de la sangre Charrua y posee el protagonista, sumandole la GARRA del mismo");
+            System.out.println("Este" + " PODER " + " que viene de la sangre Charrua y de la GARRA que posee Obdulio");
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             // Manejo de la excepción si el hilo es interrumpido
@@ -26,7 +29,7 @@ public class JavaApplication9 {
         System.out.println("*******************************************");
         System.out.println("   PARA COMENZAR DEBES ELEGIR UN ESCENARIO  ");
         System.out.println("********************************************");
-        
+
         System.out.println("LAS OPCIONES SON : 1-CAPITAL, 2-INTERIOR, 3-FRONTERA ");
         int escenario = entrada.nextInt();
         switch (escenario) {
@@ -67,6 +70,7 @@ public class JavaApplication9 {
 
         for (int i = 0; i < suministros.length; i++) {
             System.out.println("Ingrese el suministro que desea agregar " + i);
+
             suministros[i] = entrada.nextLine().toLowerCase();
             if (i == 3) {
                 System.out.println("Tienes el numero maximo de suministros");
@@ -100,9 +104,9 @@ public class JavaApplication9 {
         }
     }
 
-    int pelea(Scanner entrada) {
+    int pelea(String[] suministros, Scanner entrada) {
         Random azar = new Random();
-        String suministros[] = new String[6];
+
         String villano1 = " EL BRAIAN";
         String villano2 = " EL GAUCHO";
         String villano3 = "EL BAYANO";
@@ -150,10 +154,12 @@ public class JavaApplication9 {
                 System.out.println("No puedes atacar con poder 0 o negativo. Perdiste el turno.");
             } else {
                 enemigo -= poder;
-                System.out.println("Atacaste con " + poder + " de poder. Salud restante de " +nombreVillano + " es " + enemigo);
+                System.out.println("Atacaste con " + poder + " de poder. Salud restante de " + nombreVillano + " es " + enemigo);
             }
+
             if (enemigo <= 0) {
                 System.out.println("Lograste vencer al enemigo ");
+                turno = 3;
             } else {
                 System.out.println("La Batalla continua " + "Tu puedes!");
             }
@@ -170,7 +176,7 @@ public class JavaApplication9 {
             System.out.println("¡GANASTE! " + nombreVillano);
         } else if (saludJugador <= 0) {
             System.out.println("PERDISTE... " + nombreVillano);
-        } 
+        }
 
         return saludJugador;
 
@@ -198,16 +204,17 @@ public class JavaApplication9 {
         return encontrado;
     }
 
-    int jefe(Scanner entrada) {
+    int jefe(Scanner entrada, int saludJugador, String[] suministros) {
         Random azar = new Random();
         String boss = " EL GENERAL FRUCTUOSO RIVERA";
-        int saludJugador = 200, saludEnemigo = 400;
+
+        int saludEnemigo = 400;
         System.out.println("************************************************************");
-        System.out.println("¡¡¡ENFRENTAS AL JEFE FINAL!!!" + boss);
+        System.out.println("****        ENFRENTAS  AL  JEFE  FINAL " + boss + "  ******");
         System.out.println("************************************************************");
 
         do {
-            System.out.println("Con cuanto deseas atacar??");
+            System.out.println("Con cuanto PODER deseas atacar??");
             int ataque = entrada.nextInt();
             int golpeEnemigo = azar.nextInt(80) + 1;
             saludJugador -= golpeEnemigo;
@@ -236,29 +243,29 @@ public class JavaApplication9 {
             System.out.println("FUISTE DERROTADO POR:  " + boss);
         }
         System.out.println("***********************************");
-        System.out.println("            FIN DEL JUEGO");
+        System.out.println("            FIN DEL JUEGO          ");
         System.out.println("***********************************");
 
         return saludJugador;
     }
 
     public static void main(String[] args) {
-
         JavaApplication9 ejercicio = new JavaApplication9();
-        String nombres[] = {"Shana", "OScar", "Lucas"};
         Scanner entrada = new Scanner(System.in);
-       // int salud = ejercicio.iniciar(entrada);
-//        int saludJugador = ejercicio.pelea(entrada);
-       // System.out.println(salud);
+
+        // String nombres[] = {"Shana", "OScar", "Lucas"};
+        // int salud = ejercicio.iniciar(entrada);
+        // System.out.println(salud);
         ejercicio.bienvenida();
         ejercicio.iniciar(entrada);
 
         String suministros[] = new String[6];
-        //suministros=ejercicio.inventario(suministros, entrada);
-        // ejercicio.existe(nombres, suministros);
+        suministros = ejercicio.inventario(suministros, entrada);
+        int saludJugador = ejercicio.pelea(suministros, entrada);
+        //ejercicio.existe(inventario,suministros);
 
-        ejercicio.pelea(entrada);
-        ejercicio.jefe(entrada);
+        ejercicio.pelea(suministros, entrada);
+        ejercicio.jefe(saludJugador, suministros, entrada);
 
         // TODO code application logic here
     }
