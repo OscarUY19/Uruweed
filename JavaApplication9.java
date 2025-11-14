@@ -19,23 +19,24 @@ public class JavaApplication9 {
             System.out.println("Esta" + " GARRA " + " que proviene de la sangre Charrua que posee Obdulio en su interior");
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            // Manejo de la excepción si el hilo es interrumpido
+            
             Thread.currentThread().interrupt();
         }
     }
-    
-    int fuerza(){
-       int garra=200;
+
+    int fuerza(int garra) {
+         garra = 400;
         return garra;
     }
 
-    int iniciar(Scanner entrada,int garra) {
+    int iniciar(Scanner entrada, int garra) {
         int energia = 300, saludJugador = -1;
         System.out.println("*******************************************");
         System.out.println("   PARA COMENZAR DEBES ELEGIR UN ESCENARIO  ");
         System.out.println("********************************************");
 
         System.out.println("LAS OPCIONES SON : 1-CAPITAL, 2-INTERIOR, 3-FRONTERA ");
+        System.out.println("Utiliza los numeros del 1 al 3 para seleccionar el escenario");
         int escenario = entrada.nextInt();
         switch (escenario) {
             case 1:
@@ -61,29 +62,28 @@ public class JavaApplication9 {
                 break;
 
         }
-      
+
         return saludJugador;
-        
-        
+
     }
 
     String[] inventario(String[] suministro, Scanner entrada, boolean existe) {
-        String suministros[] = new String[5];
+        String suministros[] = new String[6];
         System.out.println("*******************************************");
         System.out.println("Puedes seleccionar los siguientes articulos:");
         System.out.println("*******************************************");
         System.out.println("Armas: cuchillo, boleadora, revolver.");
-        
-       
+
         System.out.println("Especiales: mate, agua, coquita.");
         System.out.println("********************************************");
         System.out.println("Selecciona tus articulos, PUEDES ELEGIR 2 DE CADA SECCION");
+        System.out.println("Escriba los suministros que desea agregar");
         System.out.println("Ingrese sus suministros (escriba 'eliminar' para borrar uno):");
 
         for (int i = 0; i < suministros.length; i++) {
             System.out.println("Ingrese el suministro que desea agregar " + i);
             String temporal = entrada.next();
-           // System.out.println("Los suministros en la mochila " + suministros[i]);
+            
             while (existe(suministros, temporal) == true) {
                 System.out.println("Elemento repetido");
                 temporal = entrada.next();
@@ -111,26 +111,25 @@ public class JavaApplication9 {
         return suministros;
 
     }
-     int potenciador(Scanner entrada, int saludJugador){
+
+    int potenciador(Scanner entrada, int saludJugador) {
         System.out.println("Puedes recuperar algo de vida antes de enfrentar al jefe final");
-         System.out.println("Selecciona 1-bizcochos, 2-milanesa, 3-asado");
-        int eleccion=entrada.nextInt();
-       
-         switch (eleccion) {
+        System.out.println("Selecciona 1-bizcochos, 2-milanesa, 3-asado");
+        int eleccion = entrada.nextInt();
+
+        switch (eleccion) {
             case 1:
-                saludJugador+=20;
+                saludJugador += 20;
                 System.out.println("Tenes " + saludJugador + " puntos de salud");
                 break;
             case 2:
-                saludJugador+=50;
-                 System.out.println("Tenes " + saludJugador + " puntos de salud");
+                saludJugador += 50;
+                System.out.println("Tenes " + saludJugador + " puntos de salud");
                 break;
             case 3:
-                saludJugador+=100;
-                 System.out.println("Tenes " + saludJugador + " puntos de salud");
-                 break;
-
-
+                saludJugador += 100;
+                System.out.println("Tenes " + saludJugador + " puntos de salud");
+                break;
 
             default:
                 System.out.println("Eleccion invalida");
@@ -138,7 +137,7 @@ public class JavaApplication9 {
         }
         return saludJugador;
     }
-
+    
 
     void mostrarInventario(String[] baul) {
 
@@ -186,36 +185,43 @@ public class JavaApplication9 {
         }
 
         System.out.println("Elige un objeto para usar:");
+        System.out.println("Selecciona desde el 0 al 5");
         for (int i = 0; i < suministros.length; i++) {
             System.out.println((i) + " - " + suministros[i]);
         }
-        int itemElegido = entrada.nextInt();
-        System.out.println("Elegiste " + itemElegido);
-        switch (itemElegido) {
-            case 0:
-                 garra+=20;
+       int itemElegido = entrada.nextInt();
+        System.out.println("Elegiste " + suministros[itemElegido]);
+       switch (suministros[itemElegido]) {
+            case "revolver":
+                garra += 20;
                 System.out.println("obtienes " + garra + " GARRA");
+
+                break;
+            case "agua":
+                garra += 5;
+                System.out.println("obtienes " + garra + " GARRA");
+
+                break;
+            case "mate":
+                garra += 10;
+                System.out.println("obtienes " + garra + " GARRA");
+
+                break;
+            case "cuchillo":
+                garra += 50;
+                System.out.println("obtienes " + garra + " GARRA");
+
+                break;
+            case "boleadora":
+                garra += 60;
+                System.out.println("obtienes " + garra + " GARRA");
+
+                break;
                
-                break;
-                case 1:
-                  garra+=30;  
+                case "coquita":
+                garra += 15;
                 System.out.println("obtienes " + garra + " GARRA");
-                
-                break;
-                case 2:
-                  garra+=40;   
-                System.out.println("obtienes " + garra + " GARRA");
-               
-                break;
-                case 3:
-                  garra+=50;  
-                System.out.println("obtienes " + garra + " GARRA");
-                
-                break;
-                case 4:
-                  garra+=60;  
-                System.out.println("obtienes " + garra + " GARRA");
-                
+
                 break;
             default:
                 System.out.println("Opcion invalida");
@@ -226,12 +232,15 @@ public class JavaApplication9 {
         System.out.println("***************************************");
 
         for (int turno = 1; turno <= 3; turno++) {
+            System.out.println("Tienes " + garra+ " de GARRA en total");
             System.out.print("¿Con qué cantidad de GARRA deseas atacar? ");
             int poder = entrada.nextInt();
-            if (poder<= 0) {
-                System.out.println("No puedes atacar con GARRA 0 o negativo. Perdiste el turno.");
+            if (poder <= 0 || poder>garra) {
+                System.out.println("No puedes atacar con mas GARRA que la que tenes o GARRA negativa. Perdiste el turno.");
+                turno--;
             } else {
                 enemigo -= poder;
+              
                 System.out.println("Atacaste con " + poder + " de GARRA. Salud restante de " + nombreVillano + " es " + enemigo);
             }
 
@@ -241,10 +250,13 @@ public class JavaApplication9 {
             } else {
                 System.out.println("La Batalla continua " + "Tu puedes!");
             }
+            if(garra<=0){
+                turno=3;
+            }
             int golpeEnemigo = azar.nextInt(100) + 1;
             saludJugador -= golpeEnemigo;
-            garra-=poder;
-            System.out.println(" te contraataca con " + golpeEnemigo + " de daño!");
+            garra -= poder;
+            System.out.println("Te contraataca con " + golpeEnemigo + " de daño!");
             System.out.println("Tu salud restante es " + saludJugador);
             System.out.println("Tu GARRA restante es " + garra);
 
@@ -260,11 +272,9 @@ public class JavaApplication9 {
         }
 
         return saludJugador;
-        
 
     }
 
-    
     boolean existe(String[] inventario, String suministros) {
         boolean encontrado = false;
         int i = 0;
@@ -280,24 +290,31 @@ public class JavaApplication9 {
         return encontrado;
     }
 
-    int jefe(Scanner entrada, int saludJugador, String[] suministros, int potenciador, int garra) {
+    int jefe(Scanner entrada, int saludJugador, String[] suministros, int garra) {
         Random azar = new Random();
         String boss = " EL GENERAL FRUCTUOSO RIVERA";
 
         int saludEnemigo = 400;
         System.out.println("************************************************************");
-        System.out.println("****   ENFRENTAS  AL  JEFE  FINAL " + boss + "  ******");
+        System.out.println("*   ENFRENTAS  AL  JEFE  FINAL " + boss + "  *");
         System.out.println("************************************************************");
-        
-        System.out.println(garra);
+
+       
+      
 
         do {
+            System.out.println("Tienes " + garra+ " de GARRA en total ");
             System.out.println("Con cuanta GARRA deseas atacar??");
-            garra = entrada.nextInt();
+            int poder = entrada.nextInt();
+            if(poder<=0 || poder>garra){
+                System.out.println("No puedes atacar con mas GARRA que la que tenes o GARRA negativa.");
+                
+            }
             int golpeEnemigo = azar.nextInt(80) + 1;
             saludJugador -= golpeEnemigo;
-            saludEnemigo -= garra;
-            System.out.println("Atacas a " + boss + ". ¡Le quedan " + "---" + " de salud!");
+            garra-=poder;
+            saludEnemigo -= poder;
+            System.out.println("Atacas a " + boss + ". ¡Le quedan " + saludEnemigo + " de salud!");
             if (saludEnemigo <= 0) {
                 System.out.println("Enemigo muerto");
             } else {
@@ -314,18 +331,20 @@ public class JavaApplication9 {
                 System.out.println("Moriste " + saludJugador);
             }
 
-        } while (saludJugador > 0 && saludEnemigo > 0);
+        } while (saludJugador > 0 && saludEnemigo > 0 && garra>0);
         if (saludEnemigo <= 0) {
             System.out.println("GANASTE " + boss);
-        } else {
+        } else if(saludJugador<=0) {
             System.out.println("FUISTE DERROTADO POR:  " + boss);
+        }else{
+            System.out.println("Te quedaste sin GARRA");
         }
         System.out.println("***********************************");
         System.out.println("            FIN DEL JUEGO          ");
         System.out.println("***********************************");
 
         return saludJugador;
-        
+
     }
 
     public static void main(String[] args) {
@@ -333,22 +352,22 @@ public class JavaApplication9 {
         Scanner entrada = new Scanner(System.in);
         boolean existe = false;
         String suministros[] = new String[6];
-        // String nombres[] = {"Shana", "OScar", "Lucas"};
+        int garra=400;
+        garra = ejercicio.fuerza(garra);
        
-       int garra=ejercicio.fuerza();
-        // System.out.println(salud);
-       // ejercicio.bienvenida();
+        ejercicio.bienvenida();
         int saludJugador = ejercicio.iniciar(entrada, garra);
-       // int garra=ejercicio.iniciar(entrada);
 
         suministros = ejercicio.inventario(suministros, entrada, existe);
-      
 
         saludJugador = ejercicio.pelea(suministros, entrada, saludJugador, garra);
-        int potenciador=ejercicio.potenciador(entrada, saludJugador);
-        saludJugador = ejercicio.jefe(entrada, saludJugador, suministros,potenciador, garra);
+        
 
-        // TODO code application logic here
+       saludJugador = ejercicio.potenciador(entrada, saludJugador);
+
+        saludJugador = ejercicio.jefe(entrada, saludJugador, suministros, garra);
+
+       
     }
 
 }
