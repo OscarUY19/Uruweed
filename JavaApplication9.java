@@ -77,7 +77,7 @@ public class JavaApplication9 {
         System.out.println("Especiales: mate, agua, coquita.");
         System.out.println("********************************************");
         System.out.println("Selecciona tus articulos, PUEDES ELEGIR 2 DE CADA SECCION");
-        System.out.println("Escriba los suministros que desea agregar");
+        System.out.println("ESCRIBA los suministros que desea agregar");
         System.out.println("Ingrese sus suministros (escriba 'eliminar' para borrar uno):");
 
         for (int i = 0; i < suministros.length; i++) {
@@ -342,7 +342,8 @@ public class JavaApplication9 {
         System.out.println("***********************************");
         System.out.println("            FIN DEL JUEGO          ");
         System.out.println("***********************************");
-
+        
+        fuerza(garra);
         return saludJugador;
 
     }
@@ -352,8 +353,8 @@ public class JavaApplication9 {
         Scanner entrada = new Scanner(System.in);
         boolean existe = false;
         String suministros[] = new String[6];
-        int garra=400;
-        garra = ejercicio.fuerza(garra);
+       int garra=400;
+       garra = ejercicio.fuerza(garra);
        
         ejercicio.bienvenida();
         int saludJugador = ejercicio.iniciar(entrada, garra);
